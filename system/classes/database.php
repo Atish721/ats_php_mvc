@@ -20,8 +20,9 @@ class database
 
         try {
 
-            return $this->connection = new mysqli($this->host, $this->user, $this->password, $this->database);
-        } catch (PDOException $e) {
+            // return $this->connection = new mysqli($this->host, $this->user, $this->password, $this->database);
+            return $this->connection = mysqli_connect($this->host, $this->user, $this->password, $this->database);
+        } catch (Exception $e) {
 
             echo "Database connection Error: " . $e->getMessage();
         }
