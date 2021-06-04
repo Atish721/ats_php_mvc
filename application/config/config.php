@@ -34,6 +34,6 @@ define("BASEURL", $baseUrl);
 define("HOST", "localhost");
 define("USER", "root");
 define("PASSWORD", "root");
-define("DATABASE", "mvcdb");
+define("DATABASE", "php_mvc");
 
 ?>
