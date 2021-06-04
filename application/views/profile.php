@@ -26,8 +26,7 @@
                             <th>Name</th>
                             <th>Price</th>
                             <th>Quality</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,8 +38,8 @@
                                     <td><?php echo ucwords($fruit['name']); ?></td>
                                     <td><?php echo $fruit['price'] . " pkr"; ?></td>
                                     <td><?php echo ucwords($fruit['quality']); ?></td>
-                                    <td class="text-center"><a href="<?php echo BASEURL; ?>edit-fruit/<?php echo $fruit['id']; ?>" class="btn btn-warning">Edit</a></td>
-                                    <td class="text-center"><a href="<?php echo BASEURL; ?>profile/delete/<?php echo $fruit['id']; ?>" class="btn btn-danger">Delete</a></td>
+                                    <td class="text-center"><a href="<?php echo BASEURL; ?>edit-fruit/<?php echo $fruit['id']; ?>" class="btn btn-warning">Edit</a>
+                                    <a href="<?php echo BASEURL; ?>profile/delete/<?php echo $fruit['id']; ?>" class="btn btn-danger">Delete</a></td>
                                 </tr>
 
 
