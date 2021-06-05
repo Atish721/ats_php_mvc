@@ -6,7 +6,6 @@
  * @since       31 May 2021
  */
 
-error_reporting(0);
 class framework
 {
 
@@ -27,6 +26,10 @@ class framework
       if (file_exists("application/models/" . $modelName . ".php")) {
 
          require_once "application/models/$modelName.php";
+
+         $m_array = explode('/', $modelName);
+         $modelName = end($m_array);
+
          return new $modelName;
       } else {
          echo "<div style='margin:0;padding: 10px;background-color:silver;'>Sorry $modelName.php file not found </div>";

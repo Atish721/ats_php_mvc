@@ -6,9 +6,6 @@
  * @since       31 May 2021
  */
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 class rout
 {
 
@@ -33,8 +30,10 @@ class rout
 
         require_once "application/controllers/" . $this->controller . ".php";
 
+        $c_array = explode('/', $this->controller);
+        $this->controller = end($c_array);
+        
         $this->controller = new $this->controller;
-
 
         if (isset($url[1]) && !empty($url[1])) {
             if (method_exists($this->controller, $url[1])) {
@@ -67,11 +66,11 @@ class rout
             isset($route['default_controller']) && $this->controller = $route['default_controller'];
 
             $this->routes = $route;
-            
+
             $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
             $uri = $this->removeControllerAndMethod($uri);
-        
-           
+
+
             foreach ($this->routes as $key => $value) {
 
                 if (strpos($_SERVER['REQUEST_URI'], $key) !== false) {
@@ -81,7 +80,7 @@ class rout
                 $key = str_replace(array(':any', ':num'), array('[^/]+', '[0-9]+'), $key);
 
                 if (preg_match('#^' . $key . '$#', $uri, $matches)) {
-                 
+
                     if (!is_string($value) && is_callable($value)) {
 
                         array_shift($matches);
