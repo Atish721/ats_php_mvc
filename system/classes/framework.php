@@ -38,7 +38,6 @@ class framework
 
    public function input($inputName)
    {
-
       if ($_SERVER['REQUEST_METHOD'] == "POST" || $_SERVER['REQUEST_METHOD'] == 'post') {
 
          return trim(strip_tags($_POST[$inputName]));
@@ -69,9 +68,10 @@ class framework
 
    public function getSession($sessionName)
    {
-
       if (!empty($sessionName)) {
-         return $_SESSION[$sessionName];
+         if (isset($_SESSION[$sessionName])) {
+            return $_SESSION[$sessionName];
+         }
       }
    }
 
