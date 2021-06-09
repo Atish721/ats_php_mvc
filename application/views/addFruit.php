@@ -19,29 +19,29 @@
                 <h2>Add Fruit Form</h2>
                 <form action="<?php echo BASEURL; ?>fruit-insert" method="POST">
                     <div class="form-group">
-                        <input type="text" name="name" class="form-control" placeholder="Fruit Name..." value="<?php if ($data['name']) {
-                                                                                                                    echo $data['name'];
+                        <input type="text" name="name" class="form-control" placeholder="Fruit Name..." value="<?php if ($name) {
+                                                                                                                    echo $name;
                                                                                                                 } ?>">
                         <div class="error">
-                            <?php if ($data['nameError']) {
-                                echo $data['nameError'];
+                            <?php if ($nameError) {
+                                echo $nameError;
                             } ?>
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="number" name="price" class="form-control" placeholder="Fruit Price..." value="<?php if ($data['price']) {
-                                                                                                                        echo $data['price'];
+                        <input type="number" name="price" class="form-control" placeholder="Fruit Price..." value="<?php if ($price) {
+                                                                                                                        echo $price;
                                                                                                                     } ?>">
                         <div class="error">
-                            <?php if ($data['priceError']) {
-                                echo $data['priceError'];
+                            <?php if ($priceError) {
+                                echo $priceError;
                             } ?>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <select name="quality" class="form-control" value="<?php if ($data['quality']) {
-                                                                                echo $data['quality'];
+                        <select name="quality" class="form-control" value="<?php if ($quality) {
+                                                                                echo $quality;
                                                                             } ?>">
                             <option value="">Select Quality</option>
                             <option value="a">A</option>
@@ -51,8 +51,8 @@
                             <option value="e">E</option>
                         </select>
                         <div class="error">
-                            <?php if ($data['qualityError']) {
-                                echo $data['qualityError'];
+                            <?php if ($qualityError) {
+                                echo $qualityError;
                             } ?>
                         </div>
                     </div>

@@ -22,14 +22,16 @@
                     <div class="form-group">
                         <input type="text" name="name" class="form-control" placeholder="Fruit Name..." value="<?php echo $data['data']->name; ?>">
                         <div class="error">
-                            <?php if ($data['nameError']) { echo $data['nameError'];
+                            <?php if ($data['nameError']) {
+                                echo $data['nameError'];
                             } ?>
                         </div>
                     </div>
                     <div class="form-group">
                         <input type="number" name="price" class="form-control" placeholder="Fruit Price..." value="<?php echo $data['data']->price; ?>">
                         <div class="error">
-                            <?php if ($data['priceError']) { echo $data['priceError'];
+                            <?php if ($data['priceError']) {
+                                echo $data['priceError'];
                             } ?>
                         </div>
                         <input type="hidden" name="hiddenId" value="<?php echo $data['data']->id; ?>">
@@ -38,15 +40,25 @@
                     <div class="form-group">
                         <select name="quality" class="form-control" value="<?php echo $data['data']->quality; ?>">
                             <option value="">Select Quality</option>
-                            <option <?php if (isset($data['data']->quality) && $data['data']->quality == 'a') { echo "selected='selected'";
+                            <option <?php if (isset($data['data']->quality) && $data['data']->quality == 'a') {
+                                        echo "selected='selected'";
                                     } ?> value="a">A</option>
-                            <option <?php if (isset($data['data']->quality) && $data['data']->quality == 'b') { echo "selected='selected'";
+                            <option <?php if (isset($data['data']->quality) && $data['data']->quality == 'b') {
+                                        echo "selected='selected'";
                                     } ?> value="b">B</option>
-                            <option <?php if (isset($data['data']->quality) && $data['data']->quality == 'c') { echo "selected='selected'";
+                            <option <?php if (isset($data['data']->quality) && $data['data']->quality == 'c') {
+                                        echo "selected='selected'";
                                     } ?> value="c">C</option>
+                            <option <?php if (isset($data['data']->quality) && $data['data']->quality == 'd') {
+                                        echo "selected='selected'";
+                                    } ?> value="d">D</option>
+                            <option <?php if (isset($data['data']->quality) && $data['data']->quality == 'e') {
+                                        echo "selected='selected'";
+                                    } ?> value="e">E</option>
                         </select>
                         <div class="error">
-                            <?php if ($data['qualityError']) { echo $data['qualityError'];
+                            <?php if ($data['qualityError']) {
+                                echo $data['qualityError'];
                             } ?>
                         </div>
                     </div>

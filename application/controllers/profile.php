@@ -21,7 +21,17 @@ class profile extends framework {
     }
 
     public function fruitForm(){
-      $this->view("addFruit");
+      $fruitData = [
+
+        'name'           => '',
+        'price'          => '',
+        'quality'        => '',
+        'nameError'      => '',
+        'priceError'     => '',
+        'qualityError'   => ''
+ 
+       ];
+      $this->view("addFruit",$fruitData);
     }
 
     public function fruitStore(){
