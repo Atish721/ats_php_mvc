@@ -76,6 +76,7 @@ class profile extends framework {
     
       $userId = $this->getSession('userId');
       $fruitEdit = $this->profileModel->edit_data($id, $userId);
+      
       $data = [
 
         'data'    => $fruitEdit,

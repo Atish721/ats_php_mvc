@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+// print_r($data); die;
+?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -20,45 +26,33 @@
                 <h2>Update Fruit Form</h2>
                 <form action="<?php echo BASEURL; ?>profile/updateFruit" method="POST">
                     <div class="form-group">
-                        <input type="text" name="name" class="form-control" placeholder="Fruit Name..." value="<?php echo $data['data']->name; ?>">
+                        <input type="text" name="name" class="form-control" placeholder="Fruit Name..." value="<?php echo $data->name; ?>">
                         <div class="error">
-                            <?php if ($data['nameError']) {
-                                echo $data['nameError'];
+                            <?php if ($nameError) { echo $nameError;
                             } ?>
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="number" name="price" class="form-control" placeholder="Fruit Price..." value="<?php echo $data['data']->price; ?>">
+                        <input type="number" name="price" class="form-control" placeholder="Fruit Price..." value="<?php echo $data->price; ?>">
                         <div class="error">
-                            <?php if ($data['priceError']) {
-                                echo $data['priceError'];
+                            <?php if ($priceError) { echo $priceError;
                             } ?>
                         </div>
-                        <input type="hidden" name="hiddenId" value="<?php echo $data['data']->id; ?>">
+                        <input type="hidden" name="hiddenId" value="<?php echo $data->id; ?>">
                     </div>
 
                     <div class="form-group">
-                        <select name="quality" class="form-control" value="<?php echo $data['data']->quality; ?>">
+                        <select name="quality" class="form-control" value="<?php echo $data->quality; ?>">
                             <option value="">Select Quality</option>
-                            <option <?php if (isset($data['data']->quality) && $data['data']->quality == 'a') {
-                                        echo "selected='selected'";
+                            <option <?php if (isset($data->quality) && $data->quality == 'a') { echo "selected='selected'";
                                     } ?> value="a">A</option>
-                            <option <?php if (isset($data['data']->quality) && $data['data']->quality == 'b') {
-                                        echo "selected='selected'";
+                            <option <?php if (isset($data->quality) && $data->quality == 'b') { echo "selected='selected'";
                                     } ?> value="b">B</option>
-                            <option <?php if (isset($data['data']->quality) && $data['data']->quality == 'c') {
-                                        echo "selected='selected'";
+                            <option <?php if (isset($data->quality) && $data->quality == 'c') { echo "selected='selected'";
                                     } ?> value="c">C</option>
-                            <option <?php if (isset($data['data']->quality) && $data['data']->quality == 'd') {
-                                        echo "selected='selected'";
-                                    } ?> value="d">D</option>
-                            <option <?php if (isset($data['data']->quality) && $data['data']->quality == 'e') {
-                                        echo "selected='selected'";
-                                    } ?> value="e">E</option>
                         </select>
                         <div class="error">
-                            <?php if ($data['qualityError']) {
-                                echo $data['qualityError'];
+                            <?php if ($qualityError) { echo $qualityError;
                             } ?>
                         </div>
                     </div>

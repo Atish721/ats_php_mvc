@@ -19,11 +19,8 @@ class database
     {
 
         try {
-
-            // return $this->connection = new mysqli($this->host, $this->user, $this->password, $this->database);
             return $this->connection = mysqli_connect($this->host, $this->user, $this->password, $this->database);
         } catch (Exception $e) {
-
             echo "Database connection Error: " . $e->getMessage();
         }
     }
@@ -55,8 +52,8 @@ class database
     public function query($qry)
     {
         $result = mysqli_query($this->connection, $qry);
-
-        if ($row = mysqli_fetch_assoc($result)) {
+        $row = mysqli_fetch_assoc($result);
+        if ($row) {
 
             $data = array();
             while ($rowData = mysqli_fetch_assoc($row)) {
