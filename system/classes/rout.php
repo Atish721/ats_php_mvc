@@ -18,10 +18,10 @@ class rout
     {
         $this->directory = '';
         $url = $this->url();
-        $url = $this->_validate_request($url);
-        
+
         if (!empty($url)) {
-            if (file_exists("application/controllers/".$this->directory . $url[0] . ".php")) {
+            $url = $this->_validate_request($url);
+            if (file_exists("application/controllers/" . $this->directory . $url[0] . ".php")) {
                 $this->controller = $url[0];
                 unset($url[0]);
             } else {
@@ -31,7 +31,7 @@ class rout
             $this->parse_routes();
         }
 
-        require_once "application/controllers/".$this->directory . $this->controller . ".php";
+        require_once "application/controllers/" . $this->directory . $this->controller . ".php";
 
         $c_array = explode('/', $this->controller);
         $this->controller = end($c_array);
@@ -57,35 +57,31 @@ class rout
     }
 
     protected function _validate_request($segments)
-	{
-		$c = count($segments);
-		while ($c-- > 0)
-		{
-			if ( ! file_exists('application/controllers/'.$this->directory.'.php')
-				&& is_dir('application/controllers/'.$this->directory.$segments[0])
-			)
-			{
-				$this->set_directory(array_shift($segments), TRUE);
-				continue;
-			}
+    {
+        $c = count($segments);
+        while ($c-- > 0) {
+            if (
+                !file_exists('application/controllers/' . $this->directory . '.php')
+                && is_dir('application/controllers/' . $this->directory . $segments[0])
+            ) {
+                $this->set_directory(array_shift($segments), TRUE);
+                continue;
+            }
 
-			return $segments;
-		}
+            return $segments;
+        }
 
-		return $segments;
-	}
+        return $segments;
+    }
 
     public function set_directory($dir, $append = FALSE)
-	{
-		if ($append !== TRUE OR empty($this->directory))
-		{
-			$this->directory = str_replace('.', '', trim($dir, '/')).'/';
-		}
-		else
-		{
-			$this->directory .= str_replace('.', '', trim($dir, '/')).'/';
-		}
-	}
+    {
+        if ($append !== TRUE or empty($this->directory)) {
+            $this->directory = str_replace('.', '', trim($dir, '/')) . '/';
+        } else {
+            $this->directory .= str_replace('.', '', trim($dir, '/')) . '/';
+        }
+    }
 
     public function parse_routes()
     {
@@ -119,7 +115,6 @@ class rout
                         array_shift($matches);
 
                         $val = call_user_func_array($val, $matches);
-
                     } elseif (strpos($value, '$') !== FALSE && strpos($key, '(') !== FALSE) {
                         $val = preg_replace('#^' . $key . '$#', $value, $uri);
                     }
@@ -131,7 +126,7 @@ class rout
             $val = $_SERVER['REQUEST_URI'];
             $val = $this->removeControllerAndMethod($val);
         }
-        
+
         return $val;
     }
 
