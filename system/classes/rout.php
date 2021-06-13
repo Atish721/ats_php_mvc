@@ -59,9 +59,6 @@ class rout
     protected function _validate_request($segments)
 	{
 		$c = count($segments);
-
-		// Loop through our segments and return as soon as a controller
-		// is found or when such a directory doesn't exist
 		while ($c-- > 0)
 		{
 			if ( ! file_exists('application/controllers/'.$this->directory.'.php')
@@ -75,7 +72,6 @@ class rout
 			return $segments;
 		}
 
-		// This means that all segments were actually directories
 		return $segments;
 	}
 
