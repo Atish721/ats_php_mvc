@@ -16,9 +16,12 @@ class rout
 
     public function __construct()
     {
+        $this->directory = '';
         $url = $this->url();
+        $url = $this->_validate_request($url);
+        
         if (!empty($url)) {
-            if (file_exists("application/controllers/" . $url[0] . ".php")) {
+            if (file_exists("application/controllers/".$this->directory . $url[0] . ".php")) {
                 $this->controller = $url[0];
                 unset($url[0]);
             } else {
@@ -28,11 +31,11 @@ class rout
             $this->parse_routes();
         }
 
-        require_once "application/controllers/" . $this->controller . ".php";
+        require_once "application/controllers/".$this->directory . $this->controller . ".php";
 
         $c_array = explode('/', $this->controller);
         $this->controller = end($c_array);
-        
+
         $this->controller = new $this->controller;
 
         if (isset($url[1]) && !empty($url[1])) {
@@ -53,6 +56,41 @@ class rout
         call_user_func_array([$this->controller, $this->method], $this->params);
     }
 
+    protected function _validate_request($segments)
+	{
+		$c = count($segments);
+
+		// Loop through our segments and return as soon as a controller
+		// is found or when such a directory doesn't exist
+		while ($c-- > 0)
+		{
+			if ( ! file_exists('application/controllers/'.$this->directory.'.php')
+				&& is_dir('application/controllers/'.$this->directory.$segments[0])
+			)
+			{
+				$this->set_directory(array_shift($segments), TRUE);
+				continue;
+			}
+
+			return $segments;
+		}
+
+		// This means that all segments were actually directories
+		return $segments;
+	}
+
+    public function set_directory($dir, $append = FALSE)
+	{
+		if ($append !== TRUE OR empty($this->directory))
+		{
+			$this->directory = str_replace('.', '', trim($dir, '/')).'/';
+		}
+		else
+		{
+			$this->directory .= str_replace('.', '', trim($dir, '/')).'/';
+		}
+	}
+
     public function parse_routes()
     {
         $val = '';
@@ -70,7 +108,6 @@ class rout
             $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
             $uri = $this->removeControllerAndMethod($uri);
 
-
             foreach ($this->routes as $key => $value) {
 
                 if (strpos($_SERVER['REQUEST_URI'], $key) !== false) {
@@ -86,6 +123,7 @@ class rout
                         array_shift($matches);
 
                         $val = call_user_func_array($val, $matches);
+
                     } elseif (strpos($value, '$') !== FALSE && strpos($key, '(') !== FALSE) {
                         $val = preg_replace('#^' . $key . '$#', $value, $uri);
                     }
@@ -97,6 +135,7 @@ class rout
             $val = $_SERVER['REQUEST_URI'];
             $val = $this->removeControllerAndMethod($val);
         }
+        
         return $val;
     }
 
