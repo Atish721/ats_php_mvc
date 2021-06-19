@@ -48,20 +48,20 @@ class profile extends framework {
       ];
 
       if(empty($fruitData['name'])){
-        $fruitData['nameError'] = "Name is required";
+        $fruitData['nameError'] = "Required";
       }
       if(empty($fruitData['price'])){
-        $fruitData['priceError'] = "Price is required";
+        $fruitData['priceError'] = "Required";
       }
       if(empty($fruitData['quality'])){
-        $fruitData['qualityError'] = "Quality is required";
+        $fruitData['qualityError'] = "Required";
       }
 
       if(empty($fruitData['nameError']) && empty($fruitData['priceError']) && empty($fruitData['qualityError'])){
 
         $data = ['name'=>$fruitData['name'],'price'=>$fruitData['price'], 'quality'=>$fruitData['quality'], 'userId'=>$this->getSESSION('userId')];
          if($this->profileModel->addFruit($data)){
-                $this->setFlash("fruitAdded", "Your fruit has been added successfuly");
+                $this->setFlash("fruitAdded", "Fruit has been added successfuly");
                 $this->redirect("user_profile");
          }
 
@@ -109,13 +109,13 @@ class profile extends framework {
        ];
  
        if(empty($fruitData['name'])){
-         $fruitData['nameError'] = "Name is required";
+         $fruitData['nameError'] = "Required";
        }
        if(empty($fruitData['price'])){
-         $fruitData['priceError'] = "Price is required";
+         $fruitData['priceError'] = "Required";
        }
        if(empty($fruitData['quality'])){
-         $fruitData['qualityError'] = "Quality is required";
+         $fruitData['qualityError'] = "Required";
        }
 
        if(empty($fruitData['nameError']) && empty($fruitData['priceError']) && empty($fruitData['qualityError'])){
@@ -124,7 +124,7 @@ class profile extends framework {
 
         if($this->profileModel->updateFruit($updateData,['id'=>$fruitData['hiddenId'],'userId'=>$userId])){
 
-          $this->setFlash('fruitUpdated', 'Your fruit record has been updated successfully');
+          $this->setFlash('fruitUpdated', 'Fruit has been updated successfully');
           $this->redirect("user_profile");
 
         }
@@ -139,7 +139,7 @@ class profile extends framework {
 
       $userId = $this->getSession('userId');
       if($this->profileModel->deleteFruit($id, $userId)){
-        $this->setFlash('deleted', 'Your fruit has been deleted successfully');
+        $this->setFlash('deleted', 'Fruit has been deleted successfully');
         $this->redirect('user_profile');
       }
 

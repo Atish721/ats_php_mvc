@@ -36,23 +36,23 @@ class accountController extends framework
 
         if (empty($userData['fullName'])) {
 
-            $userData['fullNameError'] = 'Full Name is required';
+            $userData['fullNameError'] = 'Required';
         }
 
         if (empty($userData['email'])) {
-            $userData['emailError'] = 'Email is required';
+            $userData['emailError'] = 'Required';
         } else {
             $isExist = $this->accountModel->checkEmail(['email' => $userData['email']]);
             if (!$isExist) {
 
-                $userData['emailError'] = "Sorry this email is already exist";
+                $userData['emailError'] = "Already exist";
             }
         }
 
         if (empty($userData['password'])) {
-            $userData['passwordError'] = "Password is required";
+            $userData['passwordError'] = "Required";
         } else if (strlen($userData['password']) < 5) {
-            $userData['passwordError'] = "Passowrd must be 5 characters long";
+            $userData['passwordError'] = "Passowrd must be 5 or more characters";
         }
 
         if (empty($userData['fullNameError']) && empty($userData['emailError']) && empty($userData['passwordError'])) {
@@ -61,7 +61,7 @@ class accountController extends framework
             $data = ['fullName' => $userData['fullName'], 'email' => $userData['email'], 'password' => $password];
             if ($this->accountModel->createAccount($data)) {
 
-                $this->setFlash("accountCreated", "Your account has been created successfully");
+                $this->setFlash("accountCreated", "Account has been created successfully");
                 $this->redirect("accountController/loginForm");
             }
         } else {
@@ -87,21 +87,21 @@ class accountController extends framework
         ];
         $password = password_hash($this->input('password'), PASSWORD_DEFAULT);
         if (empty($userData['email'])) {
-            $userData['emailError'] = "Email is required";
+            $userData['emailError'] = "Required";
         }
 
         if (empty($userData['password'])) {
-            $userData['passwordError'] = "Password is required";
+            $userData['passwordError'] = "Required";
         }
 
         if (empty($userData['emailError']) && empty($userData['passwordError'])) {
 
             $result = $this->accountModel->userLogin(['email' => $userData['email']], ['password' => $userData['password']]);
             if ($result['status'] === 'emailNotFound') {
-                $userData['emailError'] = "Sorry invalid email";
+                $userData['emailError'] = "You have entered wrong email";
                 $this->view("login", $userData);
             } else if ($result['status'] === 'passwordNotMacthed') {
-                $userData['passwordError'] = "Sorry invalid password";
+                $userData['passwordError'] = "You have entered wrong password";
                 $this->view("login", $userData);
             } else if ($result['status'] === "ok") {
                 $this->setSession("userId", $result['data']);
