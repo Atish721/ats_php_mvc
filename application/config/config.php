@@ -30,6 +30,6 @@ define("BASEURL", $baseUrl);
 define("HOST", "localhost");
 define("USER", "root");
 define("PASSWORD", "root");
-define("DATABASE", "php_mvc");
+define("DATABASE", "PhpMvc");
 
 ?>
