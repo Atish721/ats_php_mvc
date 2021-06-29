@@ -22,6 +22,7 @@ class database
             return $this->connection = mysqli_connect($this->host, $this->user, $this->password, $this->database);
         } catch (Exception $e) {
             echo "Database connection Error: " . $e->getMessage();
+            die;
         }
     }
 
