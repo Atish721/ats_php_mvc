@@ -61,7 +61,7 @@ class profile extends framework {
 
         $data = ['name'=>$fruitData['name'],'price'=>$fruitData['price'], 'quality'=>$fruitData['quality'], 'userId'=>$this->getSESSION('userId')];
          if($this->profileModel->addFruit($data)){
-                $this->setFlash("fruitAdded", "Fruit has been added successfuly");
+                $this->setFlash("fruitAdded", "Fruit has been added successfully");
                 $this->redirect("user_profile");
          }
 
