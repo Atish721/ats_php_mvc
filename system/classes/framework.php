@@ -17,6 +17,7 @@ class framework
          require_once "application/views/$viewName.php";
       } else {
          echo "<div style='margin:0;padding: 10px;background-color:silver;'>Sorry $viewName.php file not found </div>";
+         die;
       }
    }
 
@@ -33,6 +34,7 @@ class framework
          return new $modelName;
       } else {
          echo "<div style='margin:0;padding: 10px;background-color:silver;'>Sorry $modelName.php file not found </div>";
+         die;
       }
    }
 
@@ -55,6 +57,7 @@ class framework
          require_once "system/helpers/" . $helperName . ".php";
       } else {
          echo "<div style='margin:0;padding: 10px;background-color:silver;'>Sorry helper $helperName file not found </div>";
+         die;
       }
    }
 

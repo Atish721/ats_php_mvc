@@ -26,6 +26,7 @@ class rout
                 unset($url[0]);
             } else {
                 echo "<div style='margin:0;padding: 10px;background-color:silver;'>Sorry  " . $url[0] . ".php not found</div>";
+                die;
             }
         } else {
             $this->parse_routes();
@@ -44,6 +45,7 @@ class rout
                 unset($url[1]);
             } else {
                 echo "<div style='margin:0;padding: 10px;background-color:silver;'>Sorry  method " . $url[1] . " not found</div>";
+                die;
             }
         }
 
