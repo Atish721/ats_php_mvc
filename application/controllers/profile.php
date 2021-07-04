@@ -12,6 +12,7 @@ class profile extends framework {
        $this->helper("link");
        $this->profileModel = $this->model("profileModel"); 
     }
+    
     public function index(){
      $userId = ['userId'=>$this->getSession('userId')];
       $data = $this->profileModel->getData($userId);
