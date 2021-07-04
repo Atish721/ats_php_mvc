@@ -50,6 +50,10 @@ class accountModel extends database {
             }
 
         }
+        else
+        {
+            return ['status' => 'emailNotExists'];
+        }
 
 
     }

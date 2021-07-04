@@ -45,7 +45,7 @@ class accountController extends framework
             $isExist = $this->accountModel->checkEmail(['email' => $userData['email']]);
             if (!$isExist) {
 
-                $userData['emailError'] = "Already exist";
+                $userData['emailError'] = "Already taken";
             }
         }
 
@@ -97,6 +97,7 @@ class accountController extends framework
         if (empty($userData['emailError']) && empty($userData['passwordError'])) {
 
             $result = $this->accountModel->userLogin(['email' => $userData['email']], ['password' => $userData['password']]);
+   
             if ($result['status'] === 'emailNotFound') {
                 $userData['emailError'] = "You have entered wrong email";
                 $this->view("login", $userData);
@@ -106,7 +107,11 @@ class accountController extends framework
             } else if ($result['status'] === "ok") {
                 $this->setSession("userId", $result['data']);
                 $this->redirect("profile");
+            } else if ($result['status'] === "emailNotExists") {
+                $userData['emailError'] = "Email ID not exists";
+                $this->view("login", $userData);
             }
+            
         } else {
             $this->view("login", $userData);
         }
