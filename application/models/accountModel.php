@@ -29,9 +29,8 @@ class accountModel extends database {
 
     public function userLogin($email, $password){
                 
-        $email = $this->realEscapeString($email['email']); 
-        $password = $this->realEscapeString($password['password']); 
-        
+        // $email = $this->realEscapeString($email); 
+        // $password = $this->realEscapeString($password); 
         if($this->fetchAll("users",$email)){
             
             if($this->rowCount("users",$email) > 0 ){
@@ -39,7 +38,7 @@ class accountModel extends database {
                 $row = $this->fetch('*',"users",$email);
                 $dbPassword = $row->password;
                 $userId = $row->id;
-                if(password_verify($password, $dbPassword)){
+                if(password_verify($password['password'], $dbPassword)){
 
                     return ['status' => 'ok', 'data' => $userId];
 
