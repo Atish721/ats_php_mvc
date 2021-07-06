@@ -26,13 +26,19 @@ class database
         }
     }
 
+    public function realEscapeString($string)
+    {
+        $string = $this->connection->real_escape_string($string);
+        return trim($string);
+    }
+
     public function andWhereClause($whereClause)
     {
 
         $statement = ' where ';
 
         foreach ($whereClause as $column => $value) {
-            $statement .= (gettype($value) === 'integer') ?  $column . '=' . $value . ' and ' : $column . '=' . '\'' . $value . '\' and ';
+            $statement .= (gettype($value) === 'integer') ?  $column . '=' . $this->realEscapeString($value) . ' and ' : $column . '=' . '\'' . $this->realEscapeString($value) . '\' and ';
         }
 
         return rtrim($statement, ' and ');
@@ -44,7 +50,7 @@ class database
 
         foreach ($whereClause as $column => $value) {
 
-            $statement .= (gettype($value) === 'integer') ? $value . ' or ' : '\'' . $value . '\' or ';
+            $statement .= (gettype($value) === 'integer') ? $this->realEscapeString($value) . ' or ' : '\'' . $this->realEscapeString($value) . '\' or ';
         }
 
         return rtrim($statement, 'or');
@@ -85,7 +91,7 @@ class database
 
         $sql = 'update ' . $table . ' set ';
         foreach ($arrayData as $key => $value) {
-            $sql .= $key . ' = \'' . $value . '\', ';
+            $sql .= $key . ' = \'' . $this->realEscapeString($value) . '\', ';
         }
 
         $sql = rtrim($sql, ', ');

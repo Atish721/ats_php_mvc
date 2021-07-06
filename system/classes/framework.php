@@ -28,8 +28,8 @@ class framework
 
          require_once "application/models/$modelName.php";
 
-         $m_array = explode('/', $modelName);
-         $modelName = end($m_array);
+         $modelArray = explode('/', $modelName);
+         $modelName = end($modelArray);
 
          return new $modelName;
       } else {
@@ -41,10 +41,8 @@ class framework
    public function input($inputName)
    {
       if ($_SERVER['REQUEST_METHOD'] == "POST" || $_SERVER['REQUEST_METHOD'] == 'post') {
-
          return trim(strip_tags($_POST[$inputName]));
       } else if ($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'get') {
-
          return trim(strip_tags($_GET[$inputName]));
       }
    }
