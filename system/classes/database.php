@@ -13,7 +13,7 @@ class database
     public $database = DATABASE;
     public $password = PASSWORD;
     public $connection;
-    public $result;
+    public $sqlResult;
 
     public function __construct()
     {
@@ -56,32 +56,55 @@ class database
         return rtrim($statement, 'or');
     }
 
-    public function query($qry)
+    public function runQuery($sqlQuery)
     {
-        $result = mysqli_query($this->connection, $qry);
-        $row = mysqli_fetch_assoc($result);
-        if ($row) {
-
-            $data = array();
-            while ($rowData = mysqli_fetch_assoc($row)) {
-                $data[] = $rowData;
-            }
-
-            return $data;
-        } else {
-            echo mysqli_error($this->connection);
-            die;
-        }
+        if(!empty($sqlQuery))
+            return mysqli_query($this->connection, $sqlQuery);
+        else
+            return false;
     }
+
+    public function fetchObject($sqlResult)
+    {
+        if(!empty($sqlResult))
+            return mysqli_fetch_object($sqlResult);
+        else
+            return false;
+    }
+
+    public function fetchAssociative($sqlResult)
+    {
+        if(!empty($sqlResult))
+            return mysqli_fetch_assoc($sqlResult);
+        else
+            return false;
+    }
+
+    // public function rawQuery($qry)
+    // {
+    //     $sqlResult = mysqli_query($this->connection, $qry);
+    //     $row = mysqli_fetch_assoc($sqlResult);
+    //     if ($row) {
+
+    //         $data = array();
+    //         while ($rowData = mysqli_fetch_assoc($row)) {
+    //             $data[] = $rowData;
+    //         }
+
+    //         return $data;
+    //     } else {
+    //         echo mysqli_error($this->connection);
+    //         die;
+    //     }
+    // }
 
     public function insert($table, $arrayData)
     {
+        $sqlQuery = 'insert into ' . $table . ' (' . implode(',', array_keys($arrayData)) . ') values(';
 
-        $sql = 'insert into ' . $table . ' (' . implode(',', array_keys($arrayData)) . ') values(';
+        $sqlQuery .= "'" . implode("','", array_values($arrayData)) . "')";
 
-        $sql .= "'" . implode("','", array_values($arrayData)) . "')";
-
-        return $this->connection->query($sql);
+        return $this->connection->query($sqlQuery);
     }
 
     public function update($table, $arrayData, $whereClause = '')
@@ -89,33 +112,33 @@ class database
 
         $whereStatement = '';
 
-        $sql = 'update ' . $table . ' set ';
+        $sqlQuery = 'update ' . $table . ' set ';
         foreach ($arrayData as $key => $value) {
-            $sql .= $key . ' = \'' . $this->realEscapeString($value) . '\', ';
+            $sqlQuery .= $key . ' = \'' . $this->realEscapeString($value) . '\', ';
         }
 
-        $sql = rtrim($sql, ', ');
+        $sqlQuery = rtrim($sqlQuery, ', ');
 
         if (is_array($whereClause)) {
             $whereStatement = $this->andWhereClause($whereClause);
-            $sql = $sql . $whereStatement;
+            $sqlQuery = $sqlQuery . $whereStatement;
         }
 
-        return $this->connection->query($sql);
+        return $this->connection->query($sqlQuery);
     }
 
     public function delete($table, $whereClause = '')
     {
         $whereStatement = '';
 
-        $sql = 'delete from ' . $table;
+        $sqlQuery = 'delete from ' . $table;
 
         if (is_array($whereClause)) {
             $whereStatement = $this->andWhereClause($whereClause);
-            $sql = $sql . $whereStatement;
+            $sqlQuery = $sqlQuery . $whereStatement;
         }
 
-        return $this->connection->query($sql);
+        return $this->connection->query($sqlQuery);
     }
 
 
@@ -123,30 +146,30 @@ class database
     public function rowCount($table, $whereClause = '')
     {
 
-        $sql = 'select * from ' . $table;
+        $sqlQuery = 'select * from ' . $table;
 
         if (is_array($whereClause)) {
             $whereStatement = $this->andWhereClause($whereClause);
-            $sql = $sql . $whereStatement;
+            $sqlQuery = $sqlQuery . $whereStatement;
         }
 
-        $result = mysqli_query($this->connection, $sql);
+        $sqlResult = $this->runQuery($sqlQuery);
 
-        return mysqli_num_rows($result);
+        return mysqli_num_rows($sqlResult);
     }
 
     public function fetchAll($table, $whereClause = '')
     {
 
-        $sql = 'select * from ' . $table;
+        $sqlQuery = 'select * from ' . $table;
 
         if (is_array($whereClause)) {
             $whereStatement = $this->andWhereClause($whereClause);
-            $sql = $sql . $whereStatement;
+            $sqlQuery = $sqlQuery . $whereStatement;
         }
-        $result = mysqli_query($this->connection, $sql);
+        $sqlResult = $this->runQuery($sqlQuery);
         $rows = array();
-        while ($rowData = mysqli_fetch_assoc($result)) {
+        while ($rowData = $this->fetchAssociative($sqlResult)) {
             $rows[] = $rowData;
         }
 
@@ -157,14 +180,14 @@ class database
     public function fetch($select, $table, $whereClause = '')
     {
 
-        $sql = 'select ' . $select . ' from ' . $table;
+        $sqlQuery = 'select ' . $select . ' from ' . $table;
 
         if (is_array($whereClause)) {
             $whereStatement = $this->andWhereClause($whereClause);
-            $sql = $sql . $whereStatement;
+            $sqlQuery = $sqlQuery . $whereStatement;
         }
 
-        $result = mysqli_query($this->connection, $sql);
-        return mysqli_fetch_object($result);
+        $sqlResult = $this->runQuery($sqlQuery);
+        return $this->fetchObject($sqlResult);
     }
 }
