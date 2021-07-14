@@ -61,42 +61,51 @@ class database
         if(!empty($sqlQuery))
             return mysqli_query($this->connection, $sqlQuery);
         else
-            return false;
+            echo mysqli_error($this->connection); die;
     }
 
-    public function fetchObject($sqlResult)
+    public function resultObject($sqlResult)
     {
         if(!empty($sqlResult))
             return mysqli_fetch_object($sqlResult);
         else
-            return false;
+            echo mysqli_error($this->connection); die;
     }
 
-    public function fetchAssociative($sqlResult)
+    public function resultAssociative($sqlResult)
     {
         if(!empty($sqlResult))
             return mysqli_fetch_assoc($sqlResult);
         else
-            return false;
+            echo mysqli_error($this->connection); die;
     }
 
-    // public function rawQuery($qry)
-    // {
-    //     $sqlResult = mysqli_query($this->connection, $qry);
-    //     $row = mysqli_fetch_assoc($sqlResult);
-    //     if ($row) {
-
-    //         $data = array();
-    //         while ($rowData = mysqli_fetch_assoc($row)) {
-    //             $data[] = $rowData;
-    //         }
-
-    //         return $data;
-    //     } else {
-    //         echo mysqli_error($this->connection);
-    //         die;
-    //     }
-    // }
+    public function rawQuery($sqlQuery)
+    {
+        if(!empty($sqlQuery))
+        {
+            $sqlResult = $this->runQuery($sqlQuery);
+            
+            if(preg_match('/^(\s*?)select\s*?.*?\s*?from([\s]|[^;]|([\'"].*[\'"]))*?\s*?$/i', $sqlQuery))
+            {
+                $data = array();
+                while ($rowData = $this->resultAssociative($sqlResult)) {
+                    $data[] = $rowData;
+                }
+               
+                return $data;
+            }
+            else
+            {
+                return $sqlResult;
+            }
+        }
+        else
+        {
+            echo mysqli_error($this->connection);
+            die;
+        }
+    }
 
     public function insert($table, $arrayData)
     {
@@ -169,7 +178,7 @@ class database
         }
         $sqlResult = $this->runQuery($sqlQuery);
         $rows = array();
-        while ($rowData = $this->fetchAssociative($sqlResult)) {
+        while ($rowData = $this->resultAssociative($sqlResult)) {
             $rows[] = $rowData;
         }
 
@@ -188,6 +197,6 @@ class database
         }
 
         $sqlResult = $this->runQuery($sqlQuery);
-        return $this->fetchObject($sqlResult);
+        return $this->resultObject($sqlResult);
     }
 }
