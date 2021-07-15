@@ -74,9 +74,9 @@ class database
     {
         if(!empty($sqlResult))
         {
-            $data = array();
+            $data=[];
             while ($rowData = mysqli_fetch_assoc($sqlResult)) {
-                array_push($data, $rowData);
+                $data[]=$rowData;
             }
             
             return $data;
@@ -90,9 +90,18 @@ class database
         if(!empty($sqlQuery))
         {
             $sqlResult = $this->runQuery($sqlQuery);
-            
+        
             if(preg_match('/^(\s*?)select\s*?.*?\s*?from([\s]|[^;]|([\'"].*[\'"]))*?\s*?$/i', $sqlQuery))
-                return $this->resultAssociative($sqlResult);
+            {
+                if($sqlResult->num_rows==1)
+                {
+                    return $this->resultObject($sqlResult);
+                }
+                else
+                {
+                    return $this->resultAssociative($sqlResult);
+                }
+            }
             else
                 return $sqlResult;
         }
