@@ -33,7 +33,7 @@ class framework
 
          return new $modelName;
       } else {
-         echo "<div style='margin:0;padding: 10px;background-color:silver;'>Sorry $modelName model file not found </div>";
+         echo "<div style='margin:0;padding: 10px;background-color:silver;'>404 $modelName model file not found </div>";
          die;
       }
    }
@@ -54,7 +54,7 @@ class framework
 
          require_once "system/helpers/" . $helperName . ".php";
       } else {
-         echo "<div style='margin:0;padding: 10px;background-color:silver;'>Sorry helper $helperName file not found </div>";
+         echo "<div style='margin:0;padding: 10px;background-color:silver;'>404 helper $helperName file not found </div>";
          die;
       }
    }
@@ -70,7 +70,7 @@ class framework
    public function getSession($sessionName)
    {
       if (isset($_SESSION[$sessionName])) {
-            return $_SESSION[$sessionName];
+            return true;
       }
    }
 

@@ -25,7 +25,7 @@ class rout
                 $this->controller = $url[0];
                 unset($url[0]);
             } else {
-                echo "<div style='margin:0;padding: 10px;background-color:silver;'>Sorry  " . $url[0] . ".php not found</div>";
+                echo "<div style='margin:0;padding: 10px;background-color:silver;'>404 " . $url[0] . " not found</div>";
                 die;
             }
         } else {
@@ -44,7 +44,7 @@ class rout
                 $this->method = $url[1];
                 unset($url[1]);
             } else {
-                echo "<div style='margin:0;padding: 10px;background-color:silver;'>Sorry  method " . $url[1] . " not found</div>";
+                echo "<div style='margin:0;padding: 10px;background-color:silver;'>404  method " . $url[1] . " not found</div>";
                 die;
             }
         }
