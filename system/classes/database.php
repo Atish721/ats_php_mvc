@@ -17,7 +17,6 @@ class database
 
     public function __construct()
     {
-
         try {
             return $this->connection = mysqli_connect($this->host, $this->user, $this->password, $this->database);
         } catch (Exception $e) {
@@ -34,7 +33,6 @@ class database
 
     public function andWhereClause($whereClause)
     {
-
         $statement = ' where ';
 
         foreach ($whereClause as $column => $value) {
@@ -75,7 +73,14 @@ class database
     public function resultAssociative($sqlResult)
     {
         if(!empty($sqlResult))
-            return mysqli_fetch_assoc($sqlResult);
+        {
+            $data = array();
+            while ($rowData = mysqli_fetch_assoc($sqlResult)) {
+                array_push($data, $rowData);
+            }
+            
+            return $data;
+        }
         else
             echo mysqli_error($this->connection); die;
     }
@@ -87,24 +92,13 @@ class database
             $sqlResult = $this->runQuery($sqlQuery);
             
             if(preg_match('/^(\s*?)select\s*?.*?\s*?from([\s]|[^;]|([\'"].*[\'"]))*?\s*?$/i', $sqlQuery))
-            {
-                $data = array();
-                while ($rowData = $this->resultAssociative($sqlResult)) {
-                    $data[] = $rowData;
-                }
-               
-                return $data;
-            }
+                return $this->resultAssociative($sqlResult);
             else
-            {
                 return $sqlResult;
-            }
         }
         else
-        {
-            echo mysqli_error($this->connection);
-            die;
-        }
+            echo mysqli_error($this->connection); die;
+
     }
 
     public function insert($table, $arrayData)
@@ -118,7 +112,6 @@ class database
 
     public function update($table, $arrayData, $whereClause = '')
     {
-
         $whereStatement = '';
 
         $sqlQuery = 'update ' . $table . ' set ';
@@ -154,7 +147,6 @@ class database
 
     public function rowCount($table, $whereClause = '')
     {
-
         $sqlQuery = 'select * from ' . $table;
 
         if (is_array($whereClause)) {
@@ -169,7 +161,6 @@ class database
 
     public function fetchAll($table, $whereClause = '')
     {
-
         $sqlQuery = 'select * from ' . $table;
 
         if (is_array($whereClause)) {
@@ -177,18 +168,13 @@ class database
             $sqlQuery = $sqlQuery . $whereStatement;
         }
         $sqlResult = $this->runQuery($sqlQuery);
-        $rows = array();
-        while ($rowData = $this->resultAssociative($sqlResult)) {
-            $rows[] = $rowData;
-        }
-
-        return $rows;
+     
+        return $this->resultAssociative($sqlResult);
     }
 
 
     public function fetch($select, $table, $whereClause = '')
     {
-
         $sqlQuery = 'select ' . $select . ' from ' . $table;
 
         if (is_array($whereClause)) {
