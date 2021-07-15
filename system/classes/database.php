@@ -152,8 +152,6 @@ class database
         return $this->connection->query($sqlQuery);
     }
 
-
-
     public function rowCount($table, $whereClause = '')
     {
         $sqlQuery = 'select * from ' . $table;
