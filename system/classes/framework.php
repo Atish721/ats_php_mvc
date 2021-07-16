@@ -70,7 +70,7 @@ class framework
    public function getSession($sessionName)
    {
       if (isset($_SESSION[$sessionName])) {
-            return true;
+            return $_SESSION[$sessionName];
       }
    }
 
