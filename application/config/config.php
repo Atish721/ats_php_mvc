@@ -16,11 +16,11 @@ function baseUrl(){
 
 		$tmplt = "%s://%s%s";
 		$end = $dir;
-		$base_url = sprintf( $tmplt, $http, $hostname, $end );
+		$baseUrl = sprintf( $tmplt, $http, $hostname, $end );
 	}
-	else $base_url = 'http://localhost/';
+	else $baseUrl = 'http://localhost/';
 
-	return $base_url;
+	return $baseUrl;
 }
 
 $baseUrl = baseUrl();
