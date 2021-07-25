@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @package		ATS PHP MVC
- * @author		Atish Chandole
+ * @package        ATS PHP MVC
+ * @author        Atish Chandole
  * @since       31 May 2021
  */
 
 class database
 {
-    public $host     = HOST;
-    public $user     = USER;
+    public $host = HOST;
+    public $user = USER;
     public $database = DATABASE;
     public $password = PASSWORD;
     public $connection;
@@ -17,6 +17,7 @@ class database
 
     public function __construct()
     {
+        $this->sqlResult;
         try {
             return $this->connection = mysqli_connect($this->host, $this->user, $this->password, $this->database);
         } catch (Exception $e) {
@@ -36,7 +37,7 @@ class database
         $statement = ' where ';
 
         foreach ($whereClause as $column => $value) {
-            $statement .= (gettype($value) === 'integer') ?  $column . '=' . $this->realEscapeString($value) . ' and ' : $column . '=' . '\'' . $this->realEscapeString($value) . '\' and ';
+            $statement .= (gettype($value) === 'integer') ? $column . '=' . $this->realEscapeString($value) . ' and ' : $column . '=' . '\'' . $this->realEscapeString($value) . '\' and ';
         }
 
         return rtrim($statement, ' and ');
@@ -56,57 +57,49 @@ class database
 
     public function runQuery($sqlQuery)
     {
-        if(!empty($sqlQuery))
+        if (!empty($sqlQuery)) {
             return mysqli_query($this->connection, $sqlQuery);
-        else
-            echo mysqli_error($this->connection); die;
-    }
-
-    public function resultObject($sqlResult)
-    {
-        if(!empty($sqlResult))
-            return mysqli_fetch_object($sqlResult);
-        else
-            echo mysqli_error($this->connection); die;
-    }
-
-    public function resultAssociative($sqlResult)
-    {
-        if(!empty($sqlResult))
-        {
-            $data=[];
-            while ($rowData = mysqli_fetch_assoc($sqlResult)) {
-                $data[]=$rowData;
-            }
-            
-            return $data;
+        } else {
+            echo mysqli_error($this->connection);
         }
-        else
-            echo mysqli_error($this->connection); die;
+        die;
+    }
+
+    public function resultRow()
+    {
+        if (!empty($this->sqlResult)) {
+            return mysqli_fetch_object($this->sqlResult);
+        } else {
+            echo mysqli_error($this->connection);
+        }
+        die;
+    }
+
+    public function resultArray()
+    {
+        if (!empty($this->sqlResult)) {
+            $data = [];
+            while ($rowData = mysqli_fetch_assoc($this->sqlResult)) {
+                $data[] = $rowData;
+            }
+
+            return $data;
+        } else {
+            echo mysqli_error($this->connection);
+        }
+        die;
     }
 
     public function rawQuery($sqlQuery)
     {
-        if(!empty($sqlQuery))
-        {
-            $sqlResult = $this->runQuery($sqlQuery);
-        
-            if(preg_match('/^(\s*?)select\s*?.*?\s*?from([\s]|[^;]|([\'"].*[\'"]))*?\s*?$/i', $sqlQuery))
-            {
-                if($sqlResult->num_rows==1)
-                {
-                    return $this->resultObject($sqlResult);
-                }
-                else
-                {
-                    return $this->resultAssociative($sqlResult);
-                }
-            }
-            else
-                return $sqlResult;
+        if (!empty($sqlQuery)) {
+            //if (preg_match('/^(\s*?)select\s*?.*?\s*?from([\s]|[^;]|([\'"].*[\'"]))*?\s*?$/i', $sqlQuery))
+            $this->sqlResult = $this->runQuery($sqlQuery);
+            return $this->sqlResult;
+        } else {
+            echo mysqli_error($this->connection);
         }
-        else
-            echo mysqli_error($this->connection); die;
+        die;
 
     }
 
@@ -161,9 +154,8 @@ class database
             $sqlQuery = $sqlQuery . $whereStatement;
         }
 
-        $sqlResult = $this->runQuery($sqlQuery);
-
-        return mysqli_num_rows($sqlResult);
+        $this->sqlResult = $this->runQuery($sqlQuery);
+        return $this->sqlResult->num_rows;
     }
 
     public function fetchAll($table, $whereClause = '')
@@ -174,11 +166,10 @@ class database
             $whereStatement = $this->andWhereClause($whereClause);
             $sqlQuery = $sqlQuery . $whereStatement;
         }
-        $sqlResult = $this->runQuery($sqlQuery);
-     
-        return $this->resultAssociative($sqlResult);
-    }
+        $this->sqlResult = $this->runQuery($sqlQuery);
 
+        return $this->resultArray();
+    }
 
     public function fetch($select, $table, $whereClause = '')
     {
@@ -189,7 +180,7 @@ class database
             $sqlQuery = $sqlQuery . $whereStatement;
         }
 
-        $sqlResult = $this->runQuery($sqlQuery);
-        return $this->resultObject($sqlResult);
+        $this->sqlResult = $this->runQuery($sqlQuery);
+        return $this->resultRow();
     }
 }
