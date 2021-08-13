@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @package		ATS PHP MVC
- * @author		Atish Chandole
+ * @package        ATS PHP MVC
+ * @author        Atish Chandole
  * @since       31 May 2021
  */
 
 class rout
 {
 
-    public $controller  =   "";
-    public $method      =   "index";
-    public $params      =   [];
-    public $routes      =   array();
+    public $controller = "";
+    public $method = "index";
+    public $params = [];
+    public $routes = array();
 
     public function __construct()
     {
@@ -66,7 +66,7 @@ class rout
                 !file_exists('application/controllers/' . $this->directory . '.php')
                 && is_dir('application/controllers/' . $this->directory . $segments[0])
             ) {
-                $this->set_directory(array_shift($segments), TRUE);
+                $this->set_directory(array_shift($segments), true);
                 continue;
             }
 
@@ -76,9 +76,9 @@ class rout
         return $segments;
     }
 
-    public function set_directory($dir, $append = FALSE)
+    public function set_directory($dir, $append = false)
     {
-        if ($append !== TRUE or empty($this->directory)) {
+        if ($append !== true or empty($this->directory)) {
             $this->directory = str_replace('.', '', trim($dir, '/')) . '/';
         } else {
             $this->directory .= str_replace('.', '', trim($dir, '/')) . '/';
@@ -90,7 +90,7 @@ class rout
         $val = '';
 
         if (file_exists('application/config/routes.php')) {
-            include('application/config/routes.php');
+            include 'application/config/routes.php';
         }
 
         if (isset($route) && is_array($route)) {
@@ -117,7 +117,7 @@ class rout
                         array_shift($matches);
 
                         $val = call_user_func_array($val, $matches);
-                    } elseif (strpos($value, '$') !== FALSE && strpos($key, '(') !== FALSE) {
+                    } elseif (strpos($value, '$') !== false && strpos($key, '(') !== false) {
                         $val = preg_replace('#^' . $key . '$#', $value, $uri);
                     }
                 }
@@ -132,7 +132,7 @@ class rout
         return $val;
     }
 
-    function removeControllerAndMethod($val)
+    public function removeControllerAndMethod($val)
     {
         $path = dirname($_SERVER['PHP_SELF']);
         $position = strrpos($path, '/') + 1;

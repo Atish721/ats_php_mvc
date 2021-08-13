@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @package		ATS PHP MVC
- * @author		Atish Chandole
+ * @package        ATS PHP MVC
+ * @author        Atish Chandole
  * @since       31 May 2021
  */
 
@@ -12,5 +12,3 @@ error_reporting(E_ALL);
 session_start();
 include "application/config/config.php";
 include "system/init.php";
-
-?>

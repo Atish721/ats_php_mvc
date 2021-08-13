@@ -3,7 +3,6 @@
 class accountController extends framework
 {
 
-
     public function __construct()
     {
 
@@ -25,12 +24,12 @@ class accountController extends framework
 
         $userData = [
 
-            'fullName'        => $this->input('fullName'),
-            'email'           => $this->input('email'),
-            'password'        => $this->input('password'),
-            'fullNameError'   => '',
-            'emailError'      => '',
-            'passwordError'   => ''
+            'fullName' => $this->input('fullName'),
+            'email' => $this->input('email'),
+            'password' => $this->input('password'),
+            'fullNameError' => '',
+            'emailError' => '',
+            'passwordError' => '',
 
         ];
 
@@ -79,10 +78,10 @@ class accountController extends framework
 
         $userData = [
 
-            'email'         => $this->input('email'),
-            'password'      => $this->input('password'),
-            'emailError'    => '',
-            'passwordError' => ''
+            'email' => $this->input('email'),
+            'password' => $this->input('password'),
+            'emailError' => '',
+            'passwordError' => '',
 
         ];
         $password = password_hash($this->input('password'), PASSWORD_DEFAULT);
@@ -97,7 +96,7 @@ class accountController extends framework
         if (empty($userData['emailError']) && empty($userData['passwordError'])) {
 
             $result = $this->accountModel->userLogin(['email' => $userData['email']], ['password' => $userData['password']]);
-   
+
             if ($result['status'] === 'emailNotFound') {
                 $userData['emailError'] = "You have entered wrong email";
                 $this->view("login", $userData);
@@ -111,7 +110,7 @@ class accountController extends framework
                 $userData['emailError'] = "Email ID not exists";
                 $this->view("login", $userData);
             }
-            
+
         } else {
             $this->view("login", $userData);
         }

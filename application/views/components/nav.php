@@ -9,18 +9,18 @@
       <li class="nav-item active">
         <a class="nav-link" href="<?=BASEURL?>home">Home <span class="sr-only">(current)</span></a>
       </li>
-      <?php if (!$this->getSession('userId')) { ?>
+      <?php if (!$this->getSession('userId')) {?>
         <li class="nav-item">
           <a class="nav-link" href="<?=BASEURL?>home">Register</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<?=BASEURL?>login">Login</a>
         </li>
-      <?php } ?>
+      <?php }?>
     </ul>
-    <?php if ($this->getSession('userId')) { ?>
+    <?php if ($this->getSession('userId')) {?>
       <ul class="my-2 my-lg-0"><a href="<?=BASEURL?>profile/logout" class="btn btn-danger">Logout</a></ul>
-    <?php } ?>
+    <?php }?>
   </div>
 </nav>
 <!-- Close navbar -->
