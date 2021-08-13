@@ -7,7 +7,7 @@
     --red: #e51c23;
     --orange: #fd7e14;
     --yellow: #ff9800;
-    --green: #4CAF50;
+    --green: rgb(48 111 51);
     --teal: #20c997;
     --cyan: #9C27B0;
     --white: #fff;
@@ -15,7 +15,7 @@
     --gray-dark: #222;
     --primary: #2196F3;
     --secondary: #fff;
-    --success: #4CAF50;
+    --success: rgb(48 111 51);
     --info: #9C27B0;
     --warning: #ff9800;
     --danger: #e51c23;
@@ -2298,7 +2298,7 @@ textarea.form-control {
     width: 100%;
     margin-top: 0.25rem;
     font-size: 80%;
-    color: #4CAF50
+    color: rgb(48 111 51)
 }
 
 .valid-tooltip {
@@ -2318,7 +2318,7 @@ textarea.form-control {
 
 .was-validated .form-control:valid,
 .form-control.is-valid {
-    border-color: #4CAF50;
+    border-color: rgb(48 111 51);
     padding-right: calc(1.5em + 2rem);
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%234CAF50' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
     background-repeat: no-repeat;
@@ -2328,7 +2328,7 @@ textarea.form-control {
 
 .was-validated .form-control:valid:focus,
 .form-control.is-valid:focus {
-    border-color: #4CAF50;
+    border-color: rgb(48 111 51);
     -webkit-box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
     box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25)
 }
@@ -2348,14 +2348,14 @@ textarea.form-control.is-valid {
 
 .was-validated .custom-select:valid,
 .custom-select.is-valid {
-    border-color: #4CAF50;
+    border-color: rgb(48 111 51);
     padding-right: calc((1em + 2rem) * 3 / 4 + 1rem);
     background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3e%3cpath fill='%23222' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") no-repeat right 0 center/8px 10px, url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%234CAF50' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e") transparent no-repeat center right 1rem/calc(0.75em + 1rem) calc(0.75em + 1rem)
 }
 
 .was-validated .custom-select:valid:focus,
 .custom-select.is-valid:focus {
-    border-color: #4CAF50;
+    border-color: rgb(48 111 51);
     -webkit-box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
     box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25)
 }
@@ -2376,7 +2376,7 @@ textarea.form-control.is-valid {
 
 .was-validated .form-check-input:valid~.form-check-label,
 .form-check-input.is-valid~.form-check-label {
-    color: #4CAF50
+    color: rgb(48 111 51)
 }
 
 .was-validated .form-check-input:valid~.valid-feedback,
@@ -2388,12 +2388,12 @@ textarea.form-control.is-valid {
 
 .was-validated .custom-control-input:valid~.custom-control-label,
 .custom-control-input.is-valid~.custom-control-label {
-    color: #4CAF50
+    color: rgb(48 111 51)
 }
 
 .was-validated .custom-control-input:valid~.custom-control-label::before,
 .custom-control-input.is-valid~.custom-control-label::before {
-    border-color: #4CAF50
+    border-color: rgb(48 111 51)
 }
 
 .was-validated .custom-control-input:valid~.valid-feedback,
@@ -2418,12 +2418,12 @@ textarea.form-control.is-valid {
 
 .was-validated .custom-control-input:valid:focus:not(:checked)~.custom-control-label::before,
 .custom-control-input.is-valid:focus:not(:checked)~.custom-control-label::before {
-    border-color: #4CAF50
+    border-color: rgb(48 111 51)
 }
 
 .was-validated .custom-file-input:valid~.custom-file-label,
 .custom-file-input.is-valid~.custom-file-label {
-    border-color: #4CAF50
+    border-color: rgb(48 111 51)
 }
 
 .was-validated .custom-file-input:valid~.valid-feedback,
@@ -2435,7 +2435,7 @@ textarea.form-control.is-valid {
 
 .was-validated .custom-file-input:valid:focus~.custom-file-label,
 .custom-file-input.is-valid:focus~.custom-file-label {
-    border-color: #4CAF50;
+    border-color: rgb(48 111 51);
     -webkit-box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
     box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25)
 }
@@ -2717,7 +2717,7 @@ textarea.form-control.is-invalid {
 .btn.focus {
     outline: 0;
     -webkit-box-shadow: 0 0 0 0.2rem rgba(33, 150, 243, 0.25);
-    box-shadow: 0 0 0 0.2rem rgba(33, 150, 243, 0.25)
+    box-shadow: 0 0 0 0.2rem rgba(33, 150, 243, 0.25);
 }
 
 .btn.disabled,
@@ -2732,9 +2732,9 @@ fieldset:disabled a.btn {
 
 .btn-primary {
     color: #fff;
-    background: #2196F3 -webkit-gradient(linear, left top, left bottom, from(#42a6f5), to(#2196F3)) repeat-x;
-    background: #2196F3 linear-gradient(180deg, #42a6f5, #2196F3) repeat-x;
-    border-color: #2196F3
+    background: rgb(27 90 140) -webkit-gradient(linear, left top, left bottom, from(rgb(35 105 160)), to(rgb(27 90 140))) repeat-x;
+    background: rgb(35 105 160) linear-gradient(180deg, rgb(54 146 218), rgb(27 90 140)) repeat-x;
+    border-color: rgb(27 90 140);
 }
 
 .btn-primary:hover {
@@ -2762,9 +2762,9 @@ fieldset:disabled a.btn {
 .btn-primary:not(:disabled):not(.disabled).active,
 .show>.btn-primary.dropdown-toggle {
     color: #fff;
-    background-color: #0c7cd5;
+    background-color: rgb(28 90 140);
     background-image: none;
-    border-color: #0b75c9
+    border-color: rgb(11 117 201);
 }
 
 .btn-primary:not(:disabled):not(.disabled):active:focus,
@@ -2820,16 +2820,16 @@ fieldset:disabled a.btn {
 
 .btn-success {
     color: #fff;
-    background: #4CAF50 -webkit-gradient(linear, left top, left bottom, from(#67bb6a), to(#4CAF50)) repeat-x;
-    background: #4CAF50 linear-gradient(180deg, #67bb6a, #4CAF50) repeat-x;
-    border-color: #4CAF50
+    background: rgb(48 111 51) -webkit-gradient(linear, left top, left bottom, from(#67bb6a), to(rgb(48 111 51))) repeat-x;
+    background: rgb(48 111 51) linear-gradient(180deg, #67bb6a, rgb(48 111 51)) repeat-x;
+    border-color: rgb(48 111 51)
 }
 
 .btn-success:hover {
     color: #fff;
-    background: #409444 -webkit-gradient(linear, left top, left bottom, from(#5da460), to(#409444)) repeat-x;
-    background: #409444 linear-gradient(180deg, #5da460, #409444) repeat-x;
-    border-color: #3d8b40
+    background: rgb(39 103 42) -webkit-gradient(linear, left top, left bottom, from(rgb(32 142 37)), to(rgb(39 103 42))) repeat-x;
+    background: rgb(39 103 42) linear-gradient(180deg, rgb(32 142 37), rgb(39 103 42)) repeat-x;
+    border-color: rgb(76 175 80);
 }
 
 .btn-success:focus,
@@ -2841,8 +2841,8 @@ fieldset:disabled a.btn {
 .btn-success.disabled,
 .btn-success:disabled {
     color: #fff;
-    background-color: #4CAF50;
-    border-color: #4CAF50;
+    background-color: rgb(48 111 51);
+    border-color: rgb(48 111 51);
     background-image: none
 }
 
@@ -2850,9 +2850,9 @@ fieldset:disabled a.btn {
 .btn-success:not(:disabled):not(.disabled).active,
 .show>.btn-success.dropdown-toggle {
     color: #fff;
-    background-color: #3d8b40;
+    background-color: rgb(32 142 37);
     background-image: none;
-    border-color: #39833c
+    border-color: rgb(57 131 60);
 }
 
 .btn-success:not(:disabled):not(.disabled):active:focus,
@@ -3159,14 +3159,14 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-success {
-    color: #4CAF50;
-    border-color: #4CAF50
+    color: rgb(48 111 51);
+    border-color: rgb(48 111 51)
 }
 
 .btn-outline-success:hover {
     color: #fff;
-    background-color: #4CAF50;
-    border-color: #4CAF50
+    background-color: rgb(48 111 51);
+    border-color: rgb(48 111 51)
 }
 
 .btn-outline-success:focus,
@@ -3177,7 +3177,7 @@ fieldset:disabled a.btn {
 
 .btn-outline-success.disabled,
 .btn-outline-success:disabled {
-    color: #4CAF50;
+    color: rgb(48 111 51);
     background-color: transparent
 }
 
@@ -3185,8 +3185,8 @@ fieldset:disabled a.btn {
 .btn-outline-success:not(:disabled):not(.disabled).active,
 .show>.btn-outline-success.dropdown-toggle {
     color: #fff;
-    background-color: #4CAF50;
-    border-color: #4CAF50
+    background-color: rgb(48 111 51);
+    border-color: rgb(48 111 51)
 }
 
 .btn-outline-success:not(:disabled):not(.disabled):active:focus,
@@ -5586,7 +5586,7 @@ a.badge-secondary.focus {
 
 .badge-success {
     color: #fff;
-    background-color: #4CAF50
+    background-color: rgb(48 111 51)
 }
 
 a.badge-success:hover,
@@ -7231,7 +7231,7 @@ a.close.disabled {
 }
 
 .bg-primary {
-    background-color: #2196F3 !important
+    background-color: rgb(28 90 140) !important
 }
 
 a.bg-primary:hover,
@@ -7253,7 +7253,7 @@ button.bg-secondary:focus {
 }
 
 .bg-success {
-    background-color: #4CAF50 !important
+    background-color: rgb(48 111 51) !important
 }
 
 a.bg-success:hover,
@@ -7329,8 +7329,8 @@ button.bg-dark:focus {
 }
 
 .bg-gradient-success {
-    background: #4CAF50 -webkit-gradient(linear, left top, left bottom, from(#67bb6a), to(#4CAF50)) repeat-x !important;
-    background: #4CAF50 linear-gradient(180deg, #67bb6a, #4CAF50) repeat-x !important
+    background: rgb(48 111 51) -webkit-gradient(linear, left top, left bottom, from(#67bb6a), to(rgb(48 111 51))) repeat-x !important;
+    background: rgb(48 111 51) linear-gradient(180deg, #67bb6a, rgb(48 111 51)) repeat-x !important
 }
 
 .bg-gradient-info {
@@ -7415,7 +7415,7 @@ button.bg-dark:focus {
 }
 
 .border-success {
-    border-color: #4CAF50 !important
+    border-color: rgb(48 111 51) !important
 }
 
 .border-info {
@@ -10755,7 +10755,7 @@ a.text-secondary:focus {
 }
 
 .text-success {
-    color: #4CAF50 !important
+    color: rgb(48 111 51) !important
 }
 
 a.text-success:hover,
@@ -11167,7 +11167,7 @@ a.text-dark:focus {
 }
 
 .btn-success:focus {
-    background-color: #4CAF50;
+    background-color: rgb(48 111 51);
     -webkit-box-shadow: 0 0 0 2px rgba(204, 204, 204, 0.5);
     box-shadow: 0 0 0 2px rgba(204, 204, 204, 0.5)
 }
@@ -12166,8 +12166,8 @@ select.form-control[multiple] {
 .has-success input:not([type=checkbox]):focus,
 .has-success .form-control:focus {
     border-bottom: none;
-    -webkit-box-shadow: inset 0 -2px 0 #4CAF50;
-    box-shadow: inset 0 -2px 0 #4CAF50
+    -webkit-box-shadow: inset 0 -2px 0 rgb(48 111 51);
+    box-shadow: inset 0 -2px 0 rgb(48 111 51)
 }
 
 .has-warning .input-group-addon,
@@ -12331,8 +12331,8 @@ select.form-control[multiple] {
 }
 
 .alert-success {
-    background: #4CAF50 -webkit-gradient(linear, left top, left bottom, from(#67bb6a), to(#4CAF50)) repeat-x;
-    background: #4CAF50 linear-gradient(180deg, #67bb6a, #4CAF50) repeat-x
+    background: rgb(48 111 51) -webkit-gradient(linear, left top, left bottom, from(#67bb6a), to(rgb(48 111 51))) repeat-x;
+    background: rgb(48 111 51) linear-gradient(180deg, #67bb6a, rgb(48 111 51)) repeat-x
 }
 
 .alert-info {
