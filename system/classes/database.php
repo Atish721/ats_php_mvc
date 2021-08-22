@@ -28,7 +28,7 @@ class database
 
     public function realEscapeString($string)
     {
-        $string = $this->connection->real_escape_string($string);
+        $string = $this->connection->real_escape_string(stripslashes($string));
         return trim($string);
     }
 
