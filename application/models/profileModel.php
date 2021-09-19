@@ -17,9 +17,7 @@ class profileModel extends database
         if (is_array($userId)) {
 
             return $this->fetchAll("fruit", $userId);
-
         }
-
     }
 
     public function edit_data($id, $userId)
@@ -29,9 +27,7 @@ class profileModel extends database
 
             $row = $this->fetch('*', 'fruit', ['id' => $id, 'userId' => $userId]);
             return $row;
-
         }
-
     }
 
     public function updateFruit($updateData, $whereClause)
@@ -40,9 +36,7 @@ class profileModel extends database
         if (is_array($updateData)) {
 
             return $this->update("fruit", $updateData, $whereClause);
-
         }
-
     }
 
     public function deleteFruit($id, $userId)
@@ -51,7 +45,5 @@ class profileModel extends database
         if ($this->delete("fruit", ['id' => $id, 'userId' => $userId])) {
             return true;
         }
-
     }
-
 }

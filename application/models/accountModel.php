@@ -16,7 +16,6 @@ class accountModel extends database
         } else {
             return true;
         }
-
     }
 
     public function createAccount($data)
@@ -24,7 +23,6 @@ class accountModel extends database
         if ($this->insert("users", $data)) {
             return true;
         }
-
     }
 
     public function userLogin($email, $password)
@@ -42,19 +40,14 @@ class accountModel extends database
                 if (password_verify($password['password'], $dbPassword)) {
 
                     return ['status' => 'ok', 'data' => $userId];
-
                 } else {
                     return ['status' => 'passwordNotMacthed'];
                 }
-
             } else {
                 return ['status' => 'emailNotFound'];
             }
-
         } else {
             return ['status' => 'emailNotExists'];
         }
-
     }
-
 }

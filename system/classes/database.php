@@ -100,7 +100,6 @@ class database
             echo mysqli_error($this->connection);
         }
         die;
-
     }
 
     public function insert($table, $arrayData)

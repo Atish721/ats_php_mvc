@@ -110,7 +110,6 @@ class accountController extends framework
                 $userData['emailError'] = "Email ID not exists";
                 $this->view("login", $userData);
             }
-
         } else {
             $this->view("login", $userData);
         }
